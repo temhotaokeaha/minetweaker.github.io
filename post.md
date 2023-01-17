@@ -311,7 +311,7 @@ Keep in mind that not all actions can be undone. If an action in a server-side s
 
 It is possible to alter Buildcraft's assembly table and refinery recipes, as well as defining new engine fuels and coolants.
 
-<div id="assembly_table">**Assembly Table**</div>:
+<div id="assembly_table"><b>Assembly Table</b></div>:
 
 `modSupport.buildcraft.assemblyTable.addRecipe(item.netherStar, 100000, [item.diamond, item.skull.wither]);`
 
@@ -323,7 +323,7 @@ It is possible to alter Buildcraft's assembly table and refinery recipes, as wel
 
 The second argument to addRecipe is the energy cost in MJ. (in comparison: the redstone to redstone chipset recipe costs 10000MJ) Remove and RemoveRecipe work just like all the other ones present in MineTweaker and item patterns will work just fine. Note that ore dictionary entries cannot be used at assembly table recipe items.
 
-<div id="refinery">**Refinery**</div>:
+<div id="refinery"><b>Refinery</b></div>:
 
 `modSupport.buildcraft.refinery.addRecipe(tile.lava, 12, 1, tile.water);` # converts water to lava
 
@@ -384,19 +384,19 @@ All GregTech machines are supported, but recipes can only be added, not removed.
 
 `modSupport.gregtech.alloySmelter.addRecipe(output, input1, input2, duration, euPerTick);`
 
-<div id="assembler">Assembler</div>
+<div id="assembler"><b>Assembler</b></div>
 
 `modSupport.gregtech.assembler.addRecipe(output, input1, input2, duration, euPerTick);`
 
 `modSupport.gregtech.assembler.addRecipe(output, input, null, duration, euPerTick);`
 
-<div id="blast_furnace">Blast Furnace</div>
+<div id="blast_furnace"><b>Blast Furnace</b></div>
 
 `modSupport.gregtech.blastFurnace.addRecipe(output, input1, input2, duration, euPerTick, minimumHeat);`
 
 `modSupport.gregtech.blastFurnace.addRecipe(output, input, null, duration, euPerTick, minimumHeat);`
 
-<div id="canner">Canner</div>
+<div id="canner"><b>Canner</b></div>
 
 By default, canning takes 100 ticks at 1 EU/tick.
 
@@ -407,31 +407,31 @@ By default, canning takes 100 ticks at 1 EU/tick.
 `modSupport.gregtech.canner.addRecipe(output, input, null, duration);`
 `modSupport.gregtech.canner.addRecipe(output, input, null, duration, euPerTick);`
 
-<div id="chemical_reactor">Chemical Reactor</div>
+<div id="chemical_reactor"><b>Chemical Reactor</b></div>
 
 `modSupport.gregtech.chemical.addRecipe(output, input1, input2, duration);`
 
-<div id="cutter">Cutter</div>
+<div id="cutter"><b>Cutter</b></div>
 
 `modSupport.gregtech.cutter.addRecipe(output, input, duration, euPerTick);`
 
-<div id="distillation_tower">Distillation Tower</div>
+<div id="distillation_tower"><b>Distillation Tower</b></div>
 
 The distillation tower can have 1-4 outputs.
 
 `modSupport.gregtech.distillationTower.addRecipe([output1, output2, output3, output4], input, cells, duration, euPerTick);`
 
-<div id="electrolyzer">Electrolyzer</div>
+<div id="electrolyzer"><b>Electrolyzer</b></div>
 
 Electrolyzer can have 1-4 outputs.
 
 `modSupport.gregtech.electrolyzer.addRecipe([output1, output2, output3, output3], input, numCells, duration, euPerTick);`
 
-<div id="fusion_reactor">Fusion Reactor</div>
+<div id="fusion_reactor"><b>Fusion Reactor</b></div>
 
 `modSupport.gregtech.fusionReactor.addRecipe(output, input1, input2, duration, energyPerTick, startupEnergy);`
 
-<div id="imposion_compressor">Implosion Compressor</div>
+<div id="imposion_compressor"><b>Implosion Compressor</b></div>
 
 Implosion compressor has an optional byproduct. You don't need the array notation if there is no such byproduct.
 
@@ -439,7 +439,7 @@ Implosion compressor has an optional byproduct. You don't need the array notatio
 
 `modSupport.gregtech.implosionCompressor.addRecipe([output1, output2], input, itnt);`
 
-<div id="industrial_centrifuge">Industrial Centrifuge</div>
+<div id="industrial_centrifuge"><b>Industrial Centrifuge</b></div>
 
 Industrial Centrifuge can have 1-4 outputs. `addRecipe` will add a regular recipe, taking zero or more tin cells. `addRecipeFuelCan` fills a fuel can when centrifuging. The fuel can must then be replaced with a new one.
 
@@ -447,7 +447,7 @@ Industrial Centrifuge can have 1-4 outputs. `addRecipe` will add a regular recip
 
 `modSupport.gregtech.centrifuge.addRecipeFuelCan([output1, output2, output3, output4], input, duration);`
 
-<div id="industrial_grinder">Industrial Grinder</div>
+<div id="industrial_grinder"><b>Industrial Grinder</b></div>
 
 Grinder can take 1 or 2 inputs and can produce 1-4 outputs. If there is only one output, the array notation can be skipped.
 
@@ -459,7 +459,7 @@ Grinder can take 1 or 2 inputs and can produce 1-4 outputs. If there is only one
 
 `modsupport.gregtech.grinder.addRecipe([output1, output2, output3, output4], input1, input2);`
 
-<div id="lathe">Lathe</div>
+<div id="lathe"><b>Lathe</b></div>
 
 The lathe can produce 1 or 2 outputs. If there is only one output, the array notation can be skipped.
 
@@ -467,11 +467,11 @@ The lathe can produce 1 or 2 outputs. If there is only one output, the array not
 
 `modSupport.gregtech.lathe.addRecipe([output1, output2], input, duration, euPerTick);`
 
-<div id="plate_bender">Plate Bender</div>
+<div id="plate_bender"><b>Plate Bender</b></div>
 
 `modSupport.gregtech.plateBender.addRecipe(output, input, duration, euPerTick);`
 
-<div id="sawmill">Sawmill</div>
+<div id="sawmill"><b>Sawmill</b></div>
 
 Sawmill can produce 1-4 outputs and may or may not take water cells. If there is only 1 output, the array notation can be skipped.
 
@@ -480,15 +480,15 @@ Sawmill can produce 1-4 outputs and may or may not take water cells. If there is
 `modSupport.gregtech.sawmill.addRecipe(output, input, cells);`
 `modsupport.gregtech.sawmill.addRecipe([output1, output2, output3, output4], input, cells);`
 
-<div id="vacuum_freezer">Vacuum Freezer</div>
+<div id="vacuum_freezer"><b>Vacuum Freezer</b></div>
 
 `modSupport.gregtech.vacuumFreezer.addRecipe(output, input, duration);`
 
-<div id="wiremill">Wiremill</div>
+<div id="wiremill"><b>Wiremill</b></div>
 
 `modSupport.gregtech.wiremill.addRecipe(output, input, duration, euPerTick);`
 
-<div id="generators">Generators</div>
+<div id="generators"><b>Generators</b></div>
 
 If the item is a liquid container, it will fill the generator with the content of the container and generate the set amount of EU per millibucket of liquid. Additionally, if the item is a liquid container, the generator may also accept liquids of that type. If the item is not a liquid container, it will generate the equivalent of 1 bucket (= 1000 millibuckets).
 
