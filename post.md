@@ -8,12 +8,19 @@
 4. [Recipes](#recipes)
     1. [Removing Recipes](#removing_recipes)
     2. [Adding Recipes](#adding_recipes)
-6. [Mod Support](#mod_support)
-7. [Buildcraft](#buildcraft)
+5. [Furnace](#furnace)
+6. [Ore Dictionary](#ore_dictionary)
+7. [Item Names](#item_names)
+8. [Liquids](#liquids)
+9. [Server Scripts](#server_scripts)
+10. [Multi-file Scripts](#multi_file_scripts)
+11. [Mod Support](#mod_support)
+12. [Buildcraft](#buildcraft)
     1. [Assembly Table](#assembly_table)
     2. [Refinery](#refinery)
-8. [Industrial Craft](#industrial_craft)
-9. [GregTech](#gregtech)
+13. [Industrial Craft](#industrial_craft)
+    1. [Compressor, Extractor, Macerator](#compressor_extractor_macerator)
+15. [GregTech](#gregtech)
     1. [Alloy Smelter](#alloy_smelter)
     2. [Assembler](#assembler)
     3. [Blast Furnace](#blast_furnace)
@@ -32,7 +39,19 @@
     16. [Vacuum Freezer](#vacuum_freezer)
     17. [Wiremill](#wiremill)
     18. [Generators](#generators)
-10. [Forestry](#forestry)
+16. [Forestry](#forestry)
+    1. [Bees](#bees)
+    2. [Biogas Engine](#biogas_engine)
+    3. [Biogenerator](#biogenerator)
+    4. [Carpenter](#carpenter)
+    5. [Centrifuge](#centrifuge)
+    6. [Fabricator](#fabricator)
+    7. [Fermenter](#fermenter)
+    8. [Moistener](#moistener)
+    9. [Peat-Fired Engine](#peat_fired_engine)
+    10. [Rainmaker](#rainmaker)
+    11. [Squeezer](#squeezer)
+    12. [Still](#still)
 
 
 
@@ -69,7 +88,9 @@ Item IDs must be placed inside **angled brackets**, otherwise scripting engine w
 Be aware of the difference between item `<35>` and item `<35:0>`. The first item denotes any kind of wool block, and running `/minetweaker name 35` will give you tile.cloth, the internal generic name of wool blocks. If using the item (either from its ID, `<35>`, or name, `tile.cloth`) in a recipe, the recipe will accept any kind of wool, and if using it as an output, it will create item `35:0`, which is white wool. Running `/minetweaker name 35:0` will give you `tile.cloth.white`, which is white wool. Using that in a recipe, the recipe will accept only white wool, but not any kind of colored wool. Also note that when using NEI to look up item IDs, the :0 meta-value will not be shown even though the item really uses ID `<X:0>` and not ID `<X>`.
 
 ## <div id="recipes">Recipes</div>
+
 ### <div id="removing_recipes">Removing Recipes</div>
+
 To remove any and all known recipes that result in a certain item, use ```minetweaker.remove```. All of following examples will remove the Gold Block recipe:
 
 `minetweaker.remove(tile.blockGold);`
@@ -96,6 +117,7 @@ recipes.removeShapeless(tile.cloth, [tile.cloth, oreDict.dyeYellow]);`
 Note that in this example, we assign `item.ingotGold` to the name `gold` to not repeat `item.ingotGold` every time. Also note the usage of the yellow dye ore dictionary item. Also notes that shaped recipes expect a two-dimensional array (each subarray being a row of the crafting recipe) and the shapeless recipes expect a one-dimensional array (simply listing the contents of the shapeless recipe, the order of items doesn't matter).
 
 ### <div id="adding_recipes">Adding Recipes</div>
+
 `gold = item.ingotGold;`
 `wood = oreDict.plankWood;`
 
@@ -136,8 +158,6 @@ Since version 2.2.2, it is also possible to craft damaged items:
 
 `recipes.addShaped(item.pickaxeWood.withDamage(1), ...recipe...);`
 
-<br>
-
 Now you are able to make your own recipes. But what if your output items should have their damage or NBT tags set? Now this is possible with crafting functions. Consider the following statement:
 
     recipes.addShapeless(item.pickaxeWood, [item.pickaxeWood.damaged, item.axeWood.damage], function(output, input) {
@@ -172,8 +192,10 @@ Combining a Diamond Pickaxe with a Nether Star now gives a Silk Touch Diamond Pi
 This functionality can also be used to define mod item recipes that would otherwise be uncraftable. Just use an NBT editor to discover the structure of the item and replicate that structure exactly in you crafting recipes. (note: if you need a byte array, `as byte[]` will give that. Using `as int[]` will give an int array. `[1, 2]` will result in a list tag. `[1, 2] as int[]` will result in an int array tag)
 
 
-## Furnace
+## <div id="furnace"><b>Furnace</b></div>
+
 Furnace recipes can be removed:
+
 `furnace.remove(item.ingotGold);` # remove the gold ingot smelting recipe.
 
 You can also go more specific with the `removeRecipe` method:
@@ -201,7 +223,8 @@ Remember when you used to burn dry leaves as kid and have it burn in a strong an
 
 Setting an item's fuel value to 0 will make it no longer work as fuel. It is also possible to use `oreDict.xx.any` values to make all items from that entry burnable. If a value is set for both a specific item as well as its ore dictionary value, the item-specific value will take precedence.
 
-## Ore Dictionary
+## <div id="ore_dictionary"><b>Ore Dictionary</b></div>
+
 Unless you skipped the first paragraphs, you should already know how to use ore dictionary entries and ore dictionary `.any` values. But it's also possible to alter the ore dictionary, and quite easily so:
 
 `oreDict.plankWood.add(tile.leaves);`
@@ -214,11 +237,12 @@ It's also possible to define new ore dictionary items simply by using an ore dic
 oreDict.myAnyIngot.add(item.ingotIron);`
 
 Items can be removed too:
+
 `oreDict.plankWood.remove(tile.wood);`
 
 Now, this example may not be very practical, but I can sure imagine cases where you find certain recipe item alternatives too cheap and want them removed.
 
-## Item Names
+## <div id="item_names"><b>Item Names</b></div>
 If an item happens to be missing its name, or you don't like the item name, it can be changed easily:
 
 `item.ingotIron.displayName = "The Iron Ingot";
@@ -228,8 +252,9 @@ Or, if you want to go international:
 
 `item.ingotIron.setDisplayName("nl_NL", "De ijzeren ingot");`# sets the item name for Dutch translation
 
-## Liquids
-MineTweaker now also has support for liquids. These liquids are used in certain mods, such as buildcraft fuels or the refinery recipes.
+## <div id="liquids"><b>Liquids</b></div>
+
+MineTweaker has support for liquids. These liquids are used in mods like Buildcraft as fuels or in refinery recipes.
 
 Liquid values can be obtained through their source block ID or name:
 
@@ -239,7 +264,6 @@ They can also be obtained through their container:
 
 `print(item.bucketLava.liquid.displayName);
 print(<293>.liquid.displayName);`
-
 
 They can also be obtained through their registered name:
 
@@ -266,8 +290,8 @@ In 1.6.2, additional fields are available:
 
 These fields are settable too. In minecraft 1.5.2, reading them results in zero and setting them does nothing other than printing a warning.
 
+## <div id="server_scripts"><b>Server Scripts and "clear()"</b></div>
 
-## Server scripts and clear()
 When MineTweaker starts, it will first execute the scripts in its `config/minetweaker` directory. When the player joins the server (or the server starts) it will then execute
 the scripts from the server's savegame minetweaker directory. By default, these changes will supplement the changes already made. It is possible to undo the modifications that have been made before with the `minetweaker.clear` command:
 
@@ -282,7 +306,7 @@ minetweaker.clear();
 } else {`# do stuff in case we can't clear
 `}`
 
-## Multi-file scripts
+## <div id="multi_file_scripts"><b>Mukti-file Scripts"</b></div>
 Scripts start execution at main.cfg. Other files can be put in minetweaker directories and although not executed by default, can be included with include statements:
 
 `include "subfile.cfg";`
@@ -354,7 +378,7 @@ Now the filler will automatically remove still water blocks, but not grass block
 
 ## <div id="industrial_craft">Industrial Craft</div>
 
-IC2 supports the addition and removal of the Compressor, Extractor and Macerator recipes:
+## <div id="compressor_extractor_macerator">Compressor, Extractor, Macerator</div>
 
 `modSupport.ic2.macerator.remove(tile.sand);` # remove cobble to sand recipe
 `modSupport.ic2.macerator.removeRecipe(item.ironDust, item.ironOre);` # remove iron ore to iron dust recipe
@@ -509,7 +533,8 @@ If the item is a liquid container, it will fill the generator with the content o
 
 Recipes can be added to the **Forestry** machines, but not removed. Additionally, recipe alterations cannot be undone, meaning that the client will have to be restarted to join another game.
 
-**Bees**: bee genes can be blacklisted
+<div id="bees"><b>Bees</b></div>
+Bee genes can be blacklisted.
 
 `modSupport.forestry.bees.blacklist("the.internal.gene.name");`
 
@@ -519,7 +544,9 @@ If you don't know the full internal name of the gene, you can print the list of 
 
 Make sure to keep the development console open to see the output - see instructions on the beginning of this post. You should recognize your gene in the list. You can blacklist any gene. If a gene is blacklisted, it cannot be obtained through mutation.
 
-**Biogas Engine**:
+<div id="biogas_engine"><b>Biogas Engine</b></div>
+
+`powerPerCycle` provides the amount of energy per engine stroke. `burnDuration` is expressed in the number of engine strokes. `heatFactor` can be used to heat up the engine more quickly.
 
 `modSupport.forestry.biogasEngine.addFuel(liquid, powerPerCycle, burnDuration);`
 
@@ -527,13 +554,14 @@ Make sure to keep the development console open to see the output - see instructi
 
 `modSupport.forestry.biogasEngine.removeFuel(liquid);`
 
-`powerPerCycle` provides the amount of energy per engine stroke. `burnDuration` is expressed in the number of engine strokes. `heatFactor` can be used to heat up the engine more quickly.
-<br>
-**Biogenerator**:
+<div id="biogenerator"><b>Biogenerator</b></div>
+
 `modSupport.forestry.bioGenerator.addFuel(liquid * amount, euPerTick, ticksPerMillibucket);`
 `modSupport.forestry.bioGenerator.removeFuel(liquid);`
-<br>
-**Carpenter**:
+
+<div id="carpenter"><b>Carpenter</b></div>
+
+The recipe input can be any valid recipe input, including ore dictionary entries. The box parameter can be null and makes the recipe require a certain container. The input recipe can be any size from 1x1 to 3x3 but must always be a two-dimensional array.
 
 `modSupport.forestry.carpenter.addRecipe(output, [[input11, input12, input22], [input21, input22, input23], [input31, input32, input33]]);`
 
@@ -543,16 +571,17 @@ Make sure to keep the development console open to see the output - see instructi
 
 `modSupport.forestry.carpenter.addRecipe(output, [[recipe]], box, time, liquid * amountOfMillibuckets);`
 
-The recipe input can be any valid recipe input, including ore dictionary entries. The box parameter can be null and makes the recipe require a certain container. The input recipe can be any size from 1x1 to 3x3 but must always be a two-dimensional array.
-<br>
-**Centrifuge**:
+<div id="centrifuge"><b>Centrifuge</b></div>
+
+Centrifuge may output any number of items. If no item probabilities are provided, they are assumed to be 100%. If there are more items than probabilities, the remaining items will be generated with a probability of 100%. If there are more probabilities than items, they will be ignored. The centrifuge does not support ore dictionary entries for its input.
+
 `modSupport.forestry.centrifuge.addRecipe(output, input, time);`
 `modSupport.forestry.centrifuge.addRecipe([output1, output2, ...], input, time);`
 `modSupport.forestry.centrifuge.addRecipe([output1, output2, ...], input, time, [probability1, probability2, ...]);`
 
-A centrifuge may output any number of items. If no item probabilities are provided, they are assumed to be 100%. If there are more items than probabilities, the remaining items will be generated with a probability of 100%. If there are more probabilities than items, they will be ignored. The centrifuge does not support ore dictionary entries for its input.
-<br>
-**Fabricator**: it is possible to add new recipes, both with existing and new liquids. New items can be specified to be smelted into liquids internally.
+<div id="fabricator"><b>Fabricator</b></div>
+
+It's possible to add new recipes, both with existing and new liquids. New items can be specified to be smelted into liquids internally. The input recipe can be a 1x1 to 3x3 twodimensional array, just like shaped recipes. The recipe items can be items or ore dictionary entries. Recipes may or may not require a cast.
 
 `modSupport.forestry.fabricator.addRecipe(output, [[inputRecipe]], liquid);`
 
@@ -560,9 +589,9 @@ A centrifuge may output any number of items. If no item probabilities are provid
 
 `modSupport.forestry.fabricator.addSmelting(liquid * amountInMillibuckets, item, meltingPoint);`
 
-The input recipe can be a 1x1 to 3x3 twodimensional array, just like shaped recipes. The recipe items can be items or ore dictionary entries. Recipes may or may not require a cast.
-<br>
-**Fermenter**: new recipes can be added, as well as new fuels for fermentation.
+<div id="fermenter"><b>Fermenter</b></div>
+
+New recipes can be added, as well as new fuels for fermentation. The modifier value can increase the amount of fermented output generated. The input liquid can make the fermenter accept liquid as well.
 
 `modSupport.forestry.fermenter.addRecipe(output, input, outputValue);`
 `modSupport.forestry.fermenter.addRecipe(output, input, outputValue, modifier);`
@@ -570,9 +599,9 @@ The input recipe can be a 1x1 to 3x3 twodimensional array, just like shaped reci
 `modSupport.forestry.fermenter.addFuel(item, fermentPerCycle, cycles);
 modSupport.forestry.fermenter.removeFuel(item);`
 
-The modifier value can increase the amount of fermented output generated. The input liquid can make the fermenter accept liquid as well.
-<br>
-**Moistener**: new recipes can be added as well as new fuels for moistening.
+<div id="moistener"><b>Moistener</b></div>
+
+New recipes can be added as well as new fuels for moistening. The stage value indicates the priority of the fuel items: items with a lower stage value will be consumed first.
 
 `modSupport.forestry.fermenter.addRecipe(output, input, time);`
 
@@ -580,15 +609,17 @@ The modifier value can increase the amount of fermented output generated. The in
 
 `modSupport.forestry.fermenter.removeFuel(fuelItem);`
 
-The stage value indicates the priority of the fuel items: items with a lower stage value will be consumed first.
-<br>
-**Peat-fired Engine**: fuels can be added or removed
+<div id="peat_fired_engine"><b>Peat-fired Engine</b></div>
+
+Fuels can be added or removed.
 
 `modSupport.forestry.peatFiredEngine.addFuel(item, powerPerCycle, numCycles);`
 
 `modSupport.forestry.peatFiredEngine.removeFuel(item);`
-<br>
-**Rainmaker**: rainmaking and rain-stopping items can be added or removed:
+
+<div id="rainmaker"><b>Rainmaker</b></div>
+
+Rainmaking and rain-stopping items can be added or removed. Speed indicates how fast the rain starts or stops. Duration indicates the amount of ticks the rain will last.
 
 `modSupport.forestry.rainmaker.addRainItem(item, duration, speed);`
 
@@ -596,9 +627,9 @@ The stage value indicates the priority of the fuel items: items with a lower sta
 
 `modSupport.forestry.rainmaker.removeItem(item);`
 
-Speed indicates how fast the rain starts or stops. Duration indicates the amount of ticks the rain will last.
-<br>
-**Squeezer**:
+<div id="squeezer"><b>Squeezer</b></div>
+
+The squeezer recipes accept one ore more inputs. If there is only one input, the array notation can be skipped. Stack sizes are taken into account. Recipes can have a remaining item and a 1-100 value representing the chance of retrieving it.
 
 `modSupport.forestry.squeezer.addRecipe(output, input, time);`
 
@@ -612,9 +643,7 @@ Speed indicates how fast the rain starts or stops. Duration indicates the amount
 
 `modSupport.forestry.squeezer.addRecipe(output, [inputs], time, remnant, remnantChance);`
 
-The squeezer recipes accept one ore more inputs. If there is only one input, the array notation can be skipped. Stack sizes are taken into account. Recipes can have a remaining item and a 1-100 value representing the chance of retrieving it.
-
-**Still**:
+<div id="still"><b>Still</b></div>
 
 `modSupport.forestry.still.addRecipe(output, input, cyclesPerUnit);`
 
