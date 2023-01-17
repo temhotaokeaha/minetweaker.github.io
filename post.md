@@ -455,7 +455,7 @@ Electrolyzer can have 1-4 outputs.
 
 `modSupport.gregtech.fusionReactor.addRecipe(output, input1, input2, duration, energyPerTick, startupEnergy);`
 
-<div id="imposion_compressor"><b>Implosion Compressor</b></div>
+<div id="implosion_compressor"><b>Implosion Compressor</b></div>
 
 Implosion compressor has an optional byproduct. You don't need the array notation if there is no such byproduct.
 
@@ -517,16 +517,27 @@ Sawmill can produce 1-4 outputs and may or may not take water cells. If there is
 If the item is a liquid container, it will fill the generator with the content of the container and generate the set amount of EU per millibucket of liquid. Additionally, if the item is a liquid container, the generator may also accept liquids of that type. If the item is not a liquid container, it will generate the equivalent of 1 bucket (= 1000 millibuckets).
 
 `modSupport.gregtech.dieselGenerator.addFuel(item, euPerMillibucket);`
+
 `modSupport.gregtech.dieselGenerator.addFuel(item, euPerMillibucket, output);`
+
 `modSupport.gregtech.gasTurbine.addFuel(item, euPerMillibucket);`
+
 `modSupport.gregtech.gasTurbine.addFuel(item, euPerMillibucket, output);`
+
 `modSupport.gregtech.thermalGenerator.addFuel(item, euPerMillibucket);`
+
 `modSupport.gregtech.thermalGenerator.addFuel(item, euPerMillibucket, output);`
+
 `modSupport.gregtech.denseFluidGenerator.addFuel(item, euPerMillibucket);`
+
 `modSupport.gregtech.denseFluidGenerator.addFuel(item, euPerMillibucket, output);`
+
 `modSupport.gregtech.plasmaGenerator.addFuel(item, euPerMillibucket);`
+
 `modSupport.gregtech.plasmaGenerator.addFuel(item, euPerMillibucket, output);`
+
 `modSupport.gregtech.magicGenerator.addFuel(item, euPerMillibucket);`
+
 `modSupport.gregtech.magicGenerator.addFuel(item, euPerMillibucket, output);`
 
 ## <div id="forestry">Forestry</div>
