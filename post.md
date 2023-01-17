@@ -52,7 +52,7 @@
     10. [Rainmaker](#rainmaker)
     11. [Squeezer](#squeezer)
     12. [Still](#still)
-
+17. [Known Bugs](#known_bugs)
 
 
 ## <div id="intro">Intro</div>
@@ -335,7 +335,7 @@ Keep in mind that not all actions can be undone. If an action in a server-side s
 
 It is possible to alter Buildcraft's assembly table and refinery recipes, as well as defining new engine fuels and coolants.
 
-<div id="assembly_table"><b>Assembly Table</b></div>:
+<div id="assembly_table"><b>Assembly Table</b></div>
 
 `modSupport.buildcraft.assemblyTable.addRecipe(item.netherStar, 100000, [item.diamond, item.skull.wither]);`
 
@@ -347,7 +347,7 @@ It is possible to alter Buildcraft's assembly table and refinery recipes, as wel
 
 The second argument to addRecipe is the energy cost in MJ. (in comparison: the redstone to redstone chipset recipe costs 10000MJ) Remove and RemoveRecipe work just like all the other ones present in MineTweaker and item patterns will work just fine. Note that ore dictionary entries cannot be used at assembly table recipe items.
 
-<div id="refinery"><b>Refinery</b></div>:
+<div id="refinery"><b>Refinery</b></div>
 
 `modSupport.buildcraft.refinery.addRecipe(tile.lava, 12, 1, tile.water);` # converts water to lava
 
@@ -369,7 +369,7 @@ Fuels can be added and removed too, as well as some other things:
 
 The fields `powerPerCycle` and `totalBurningTime` are also settable.
 
-For the buildcraft filler, "soft" blocks can be removed by the filler (without dropping anything). Soft blocks can be added or removed with minetweaker:
+For the Buildcraft filler, "soft" blocks can be removed by the filler (without dropping anything). Soft blocks can be added or removed with MineTweaker:
 
 `modSupport.buildcraft.setSoftBlock(tile.water, true);`
 `modSupport.buildcraft.setSoftBlock(tile.grass, false);`
@@ -545,6 +545,7 @@ If the item is a liquid container, it will fill the generator with the content o
 Recipes can be added to the **Forestry** machines, but not removed. Additionally, recipe alterations cannot be undone, meaning that the client will have to be restarted to join another game.
 
 <div id="bees"><b>Bees</b></div>
+
 Bee genes can be blacklisted.
 
 `modSupport.forestry.bees.blacklist("the.internal.gene.name");`
@@ -658,7 +659,8 @@ The squeezer recipes accept one ore more inputs. If there is only one input, the
 
 `modSupport.forestry.still.addRecipe(output, input, cyclesPerUnit);`
 
-## Known bugs
+## <div id="known_bugs">Known bugs</div>
+
 - Sometimes removing recipes for IC2 machines doesn't work. This seems caused by IC2 code.
 - Assembly table recipes added by server scripts don't show up in NEI. This seems a NEI problem.
 - In 1.6.2 and 1.6.4, server scripts can't alter item names.
