@@ -404,6 +404,12 @@ The new machines are also available:
 
 All GregTech machines are supported, but recipes can only be added, not removed. For all the machines, the duration is measured in ticks (1 second = 20 ticks) and energy consumption in EU per tick. None of the GregTech functions are undoable! Be aware that GregTech doesn't support ore dictionary values in its machine recipes.
 
+At least _some_ machines don't support multipliers. For example, the following script, although will be mentioned as registered in console and won't give errors, won't actually add the recipe:
+
+`modSupport.gregtech.alloySmelter.addRecipe(book, sugarcane * 3, leather, 100, 10);`
+
+
+
 <div id="alloy_smelter"><b>Alloy Smelter</b></div>
 
 `modSupport.gregtech.alloySmelter.addRecipe(output, input1, input2, duration, euPerTick);`
